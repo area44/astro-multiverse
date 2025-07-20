@@ -1190,8 +1190,7 @@ body.touch .poptrox-popup .nav-next {
 /* Wrapper */
 
 #wrapper {
-  transition:
-    filter 0.5s ease;
+  transition: filter 0.5s ease;
   position: relative;
 }
 
@@ -1370,8 +1369,7 @@ body.is-preload #header {
 /* Main */
 
 #main {
-  transition:
-    filter 0.5s ease;
+  transition: filter 0.5s ease;
   display: flex;
   flex-wrap: wrap;
 }
