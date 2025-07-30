@@ -17,3 +17,15 @@ jobs:
       
       - name: Run autofix
         uses: area44/workflows/autofix@v2.2.0
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

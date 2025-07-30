@@ -1,12 +1,12 @@
 import { defineConfig } from "astro/config";
 import { FontaineTransform } from "fontaine";
 
-const VERCEL_PREVIEW_SITE =
-  process.env.VERCEL_ENV !== "production" &&
-  process.env.VERCEL_URL &&
-  `https://${process.env.VERCEL_URL}`;
-
-const site = VERCEL_PREVIEW_SITE || "https://torn4dom4n.github.io";
+const site = process.env.VERCEL
+  ? process.env.VERCEL_ENV === "production"
+    ? "https://astro-multiverse.vercel.app"
+    : `https://${process.env.VERCEL_URL}`
+  : (process.env.SITE ?? "http://localhost:4321");
+const base = process.env.BASE || "/";
 
 // https://astro.build/config
 export default defineConfig({
