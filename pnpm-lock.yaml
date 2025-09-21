@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       astro:
-        specifier: ^5.13.8
-        version: 5.13.8(@types/node@24.3.0)(jiti@2.4.2)(rollup@4.46.3)(typescript@5.5.4)
+        specifier: ^5.13.9
+        version: 5.13.9(@types/node@24.3.0)(jiti@2.4.2)(rollup@4.46.3)(typescript@5.5.4)
       fontaine:
         specifier: ^0.6.0
         version: 0.6.0
@@ -611,8 +611,8 @@ packages:
   array-iterate@2.0.1:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
 
-  astro@5.13.8:
-    resolution: {integrity: sha512-SNURCAlfL4Z2ylF3NMmNk/s3RnSDSolXALXtH0gsN8hFZ7oppnF0sXVQLAGAxnzADemfRp3/9G58EALZ36qUdA==}
+  astro@5.13.9:
+    resolution: {integrity: sha512-vwnJ9Db/X35G3n7F2KgcAAsQ7Du00s0ZFvB+Sx0w7Jl4fwit4+mHJbL4U2ZFxIo9tU07oZEey/2g1Awom7i0LQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2010,7 +2010,7 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
-  astro@5.13.8(@types/node@24.3.0)(jiti@2.4.2)(rollup@4.46.3)(typescript@5.5.4):
+  astro@5.13.9(@types/node@24.3.0)(jiti@2.4.2)(rollup@4.46.3)(typescript@5.5.4):
     dependencies:
       '@astrojs/compiler': 2.12.2
       '@astrojs/internal-helpers': 0.7.2
@@ -2457,7 +2457,7 @@ snapshots:
   magic-regexp@0.10.0:
     dependencies:
       estree-walker: 3.0.3
-      magic-string: 0.30.17
+      magic-string: 0.30.19
       mlly: 1.7.4
       regexp-tree: 0.1.27
       type-level-regexp: 0.1.17
