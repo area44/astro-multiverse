@@ -185,15 +185,15 @@ body {
 body.is-preload *,
 body.is-preload *:before,
 body.is-preload *:after {
-  animation: none ;
-  transition: none ;
+  animation: none;
+  transition: none;
 }
 
 body.is-resizing *,
 body.is-resizing *:before,
 body.is-resizing *:after {
-  animation: none ;
-  transition: none ;
+  animation: none;
+  transition: none;
 }
 
 /* Type */
@@ -230,7 +230,7 @@ a {
 
 a:hover {
   border-bottom-color: transparent;
-  color: #34a58e ;
+  color: #34a58e;
 }
 
 strong,
@@ -397,7 +397,7 @@ button,
   border: 0;
   border-radius: 0;
   box-shadow: inset 0 0 0 2px #36383c;
-  color: #ffffff ;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-size: 0.9em;
@@ -418,7 +418,7 @@ input[type="button"]:hover,
 button:hover,
 .button:hover {
   box-shadow: inset 0 0 0 2px #34a58e;
-  color: #34a58e ;
+  color: #34a58e;
 }
 
 input[type="submit"]:hover:active,
@@ -427,7 +427,7 @@ input[type="button"]:hover:active,
 button:hover:active,
 .button:hover:active {
   background-color: rgba(52, 165, 142, 0.15);
-  color: #34a58e ;
+  color: #34a58e;
 }
 
 input[type="submit"].fit,
@@ -469,7 +469,7 @@ input[type="button"].primary:hover,
 button.primary:hover,
 .button.primary:hover {
   background-color: #47c5ab;
-  color: #ffffff ;
+  color: #ffffff;
 }
 
 input[type="submit"].primary:hover:active,
@@ -672,7 +672,7 @@ input[type="radio"] + label:before {
   font-variant: normal;
   text-rendering: auto;
   line-height: 1;
-  text-transform: none ;
+  text-transform: none;
   font-weight: 900;
 }
 
@@ -819,7 +819,7 @@ ul.actions.fit.stacked {
   ul.actions:not(.fixed) {
     flex-direction: column;
     margin-left: 0;
-    width: 100% ;
+    width: 100%;
   }
 
   ul.actions:not(.fixed) li {
@@ -1116,7 +1116,7 @@ table.alt tfoot {
 }
 
 .poptrox-popup .loader {
-  animation: spinner 1s infinite linear ;
+  animation: spinner 1s infinite linear;
   background-image: url("images/spinner.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -1153,7 +1153,7 @@ table.alt tfoot {
 body.touch .poptrox-popup .closer,
 body.touch .poptrox-popup .nav-previous,
 body.touch .poptrox-popup .nav-next {
-  opacity: 1 ;
+  opacity: 1;
 }
 
 @media screen and (max-width: 980px) {
@@ -1173,13 +1173,13 @@ body.touch .poptrox-popup .nav-next {
   }
 
   .poptrox-popup .caption {
-    display: none ;
+    display: none;
   }
 
   .poptrox-popup .closer,
   .poptrox-popup .nav-previous,
   .poptrox-popup .nav-next {
-    display: none ;
+    display: none;
   }
 }
 
@@ -1224,7 +1224,7 @@ body.modal-active #wrapper:after {
 }
 
 #wrapper:before {
-  animation: spinner 1s infinite linear ;
+  animation: spinner 1s infinite linear;
   pointer-events: none;
   transition:
     top 0.75s ease-in-out,
@@ -1250,8 +1250,8 @@ body.modal-active #wrapper:after {
 }
 
 body.is-preload #wrapper:before {
-  transition: opacity 1s ease-out ;
-  transition-delay: 0.5s ;
+  transition: opacity 1s ease-out;
+  transition-delay: 0.5s;
   opacity: 0.25;
   top: 50%;
   visibility: visible;
@@ -1297,7 +1297,7 @@ body.is-preload #header {
 }
 
 #header h1 a:hover {
-  color: inherit ;
+  color: inherit;
 }
 
 #header nav {
@@ -1328,7 +1328,7 @@ body.is-preload #header {
 }
 
 #header nav > ul > li a:hover {
-  color: #ffffff ;
+  color: #ffffff;
 }
 
 #header nav > ul > li a.active {
