@@ -4,6 +4,7 @@ import ExternalScripts from "@/components/ExternalScripts.astro";
 import Footer from "@/components/Footer.astro";
 import Gallery from "@/components/Gallery.astro";
 import Header from "@/components/Header.astro";
+import SiteScripts from "@/components/SiteScripts";
 
 let title = "Multiverse by HTML5 UP";
 let description =
@@ -25,6 +26,7 @@ let description =
       <Footer title={title} description={description} />
       <Gallery />
     </div>
+    <SiteScripts client:load />
     <ExternalScripts />
   </body>
 </html>
