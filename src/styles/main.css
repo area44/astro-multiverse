@@ -1639,8 +1639,20 @@ body.is-preload #main .thumb {
 @media screen and (max-width: 480px) {
   #main .thumb {
     transition-delay: 1.175s;
-    height: calc(40vh - 2em);
-    min-height: 18em;
+    height: auto;
+    min-height: 0;
+    width: 100%;
+  }
+
+  #main .thumb > .image {
+    height: auto;
+    position: relative;
+  }
+
+  #main .thumb > .image img {
+    display: block;
+    height: auto;
+    object-fit: contain;
     width: 100%;
   }
 
