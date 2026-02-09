@@ -346,6 +346,31 @@ const SiteScripts = () => {
   }, []);
 
   useEffect(() => {
+    if (!isOpen || !activeItem?.href) return;
+
+    setIsLoading(true);
+
+    const previewImage = new Image();
+    previewImage.src = activeItem.href;
+
+    const handleComplete = () => {
+      setIsLoading(false);
+    };
+
+    previewImage.onload = handleComplete;
+    previewImage.onerror = handleComplete;
+
+    if (previewImage.complete) {
+      setIsLoading(false);
+    }
+
+    return () => {
+      previewImage.onload = null;
+      previewImage.onerror = null;
+    };
+  }, [isOpen, activeItem?.href]);
+
+  useEffect(() => {
     const body = document.body;
     if (isOpen) {
       body.classList.add("modal-active");
@@ -439,6 +464,7 @@ const SiteScripts = () => {
             display: isLoading ? "none" : "block",
           }}
           onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
         />
         <button
           type="button"
