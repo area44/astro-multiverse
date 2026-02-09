@@ -18,7 +18,7 @@ type GalleryItem = {
 
 const getGalleryItems = () => {
   const anchors = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>("#main .thumb > a.image"),
+    document.querySelectorAll<HTMLAnchorElement>("#main .thumb > a.image")
   );
 
   return anchors.map((anchor) => {
@@ -36,17 +36,27 @@ const getGalleryItems = () => {
 
 const updateThumbBackgrounds = () => {
   const anchors = document.querySelectorAll<HTMLAnchorElement>(
-    "#main .thumb > a.image",
+    "#main .thumb > a.image"
   );
 
   anchors.forEach((anchor) => {
     const img = anchor.querySelector<HTMLImageElement>("img");
     if (!img) return;
-
-    anchor.style.backgroundImage = `url(${img.currentSrc || img.src})`;
     const position = img.dataset.position;
-    if (position) anchor.style.backgroundPosition = position;
-    img.style.display = "none";
+
+    const setBackground = () => {
+      const source = img.currentSrc || img.src || img.getAttribute("src") || "";
+      if (!source) return;
+      anchor.style.backgroundImage = `url(${source})`;
+      if (position) anchor.style.backgroundPosition = position;
+      img.style.display = "none";
+    };
+
+    if (img.complete) {
+      setBackground();
+    } else {
+      img.addEventListener("load", setBackground, { once: true });
+    }
   });
 };
 
@@ -56,9 +66,7 @@ const setupPanels = () => {
   const panelMap = panels.map((panel) => {
     const id = panel.getAttribute("id");
     const toggles = id
-      ? Array.from(
-          document.querySelectorAll<HTMLElement>(`[href="#${id}"]`),
-        )
+      ? Array.from(document.querySelectorAll<HTMLElement>(`[href="#${id}"]`))
       : [];
     const closer = panel.querySelector<HTMLElement>(".closer");
 
@@ -67,14 +75,20 @@ const setupPanels = () => {
 
   const hidePanel = (panel: HTMLElement, toggles: HTMLElement[]) => {
     panel.classList.remove("active");
-    toggles.forEach((toggle) => toggle.classList.remove("active"));
+    toggles.forEach((toggle) => {
+      toggle.classList.remove("active");
+    });
     body.classList.remove("content-active");
   };
 
   const showPanel = (panel: HTMLElement, toggles: HTMLElement[]) => {
-    panelMap.forEach((entry) => hidePanel(entry.panel, entry.toggles));
+    panelMap.forEach((entry) => {
+      hidePanel(entry.panel, entry.toggles);
+    });
     panel.classList.add("active");
-    toggles.forEach((toggle) => toggle.classList.add("active"));
+    toggles.forEach((toggle) => {
+      toggle.classList.add("active");
+    });
     body.classList.add("content-active");
   };
 
@@ -94,7 +108,9 @@ const setupPanels = () => {
     };
 
     panel.addEventListener("click", stopPropagation);
-    removeHandlers.push(() => panel.removeEventListener("click", stopPropagation));
+    removeHandlers.push(() =>
+      panel.removeEventListener("click", stopPropagation)
+    );
 
     toggles.forEach((toggle) => {
       toggle.style.cursor = "pointer";
@@ -105,7 +121,9 @@ const setupPanels = () => {
       };
 
       toggle.addEventListener("click", onToggleClick);
-      removeHandlers.push(() => toggle.removeEventListener("click", onToggleClick));
+      removeHandlers.push(() =>
+        toggle.removeEventListener("click", onToggleClick)
+      );
     });
 
     if (closer) {
@@ -114,7 +132,9 @@ const setupPanels = () => {
         hidePanel(panel, toggles);
       };
       closer.addEventListener("click", onCloseClick);
-      removeHandlers.push(() => closer.removeEventListener("click", onCloseClick));
+      removeHandlers.push(() =>
+        closer.removeEventListener("click", onCloseClick)
+      );
     }
   });
 
@@ -122,7 +142,9 @@ const setupPanels = () => {
     if (body.classList.contains("content-active")) {
       event.preventDefault();
       event.stopPropagation();
-      panelMap.forEach((entry) => hidePanel(entry.panel, entry.toggles));
+      panelMap.forEach((entry) => {
+        hidePanel(entry.panel, entry.toggles);
+      });
     }
   };
 
@@ -130,7 +152,9 @@ const setupPanels = () => {
     if (event.key === "Escape" && body.classList.contains("content-active")) {
       event.preventDefault();
       event.stopPropagation();
-      panelMap.forEach((entry) => hidePanel(entry.panel, entry.toggles));
+      panelMap.forEach((entry) => {
+        hidePanel(entry.panel, entry.toggles);
+      });
     }
   };
 
@@ -140,7 +164,9 @@ const setupPanels = () => {
   removeHandlers.push(() => window.removeEventListener("keyup", onKeyUp));
 
   return () => {
-    removeHandlers.forEach((remove) => remove());
+    removeHandlers.forEach((remove) => {
+      remove();
+    });
   };
 };
 
@@ -167,7 +193,9 @@ const setupHeaderLinks = () => {
   });
 
   return () => {
-    handlers.forEach((remove) => remove());
+    handlers.forEach((remove) => {
+      remove();
+    });
   };
 };
 
@@ -175,7 +203,8 @@ const setupFooterCopyright = () => {
   const footer = document.getElementById("footer");
   const copyright = footer?.querySelector<HTMLElement>(".copyright");
   const parent = copyright?.parentElement ?? null;
-  const lastParent = parent?.parentElement?.lastElementChild as HTMLElement | null;
+  const lastParent = parent?.parentElement
+    ?.lastElementChild as HTMLElement | null;
 
   if (!copyright || !parent || !lastParent) {
     return () => undefined;
@@ -231,7 +260,7 @@ const SiteScripts = () => {
       maxWidth: `calc(100vw - ${windowMargin * 2}px)`,
       maxHeight: `calc(100vh - ${windowMargin * 2}px)`,
     }),
-    [windowMargin],
+    [windowMargin]
   );
 
   useEffect(() => {
@@ -292,7 +321,7 @@ const SiteScripts = () => {
 
   useEffect(() => {
     const anchors = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>("#main .thumb > a.image"),
+      document.querySelectorAll<HTMLAnchorElement>("#main .thumb > a.image")
     );
 
     const handlers = anchors.map((anchor, index) => {
@@ -310,9 +339,11 @@ const SiteScripts = () => {
     });
 
     return () => {
-      handlers.forEach((remove) => remove());
+      handlers.forEach((remove) => {
+        remove();
+      });
     };
-  }, [items]);
+  }, []);
 
   useEffect(() => {
     const body = document.body;
@@ -355,7 +386,6 @@ const SiteScripts = () => {
   return createPortal(
     <div
       className="poptrox-overlay"
-      onClick={() => setIsOpen(false)}
       style={{
         position: "fixed",
         inset: 0,
@@ -363,21 +393,34 @@ const SiteScripts = () => {
         textAlign: "center",
       }}
     >
-      <div
-        aria-hidden="true"
-        style={{ display: "inline-block", height: "100%", verticalAlign: "middle" }}
-      />
-      <div
-        aria-hidden="true"
+      <button
+        type="button"
+        aria-label="Close lightbox"
+        onClick={() => setIsOpen(false)}
         style={{
           position: "absolute",
           inset: 0,
           background: "rgba(0,0,0,0.6)",
+          border: 0,
+          padding: 0,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          display: "inline-block",
+          height: "100%",
+          verticalAlign: "middle",
         }}
       />
       <div
         className={`poptrox-popup${isLoading ? " loading" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image viewer"
+        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
+        onKeyDown={(event) => event.stopPropagation()}
         style={{
           display: "inline-block",
           verticalAlign: "middle",
@@ -397,29 +440,34 @@ const SiteScripts = () => {
           }}
           onLoad={() => setIsLoading(false)}
         />
-        <span
+        <button
+          type="button"
           className="closer"
-          role="button"
           aria-label="Close"
           onClick={() => setIsOpen(false)}
+          style={{ background: "none", border: 0, padding: 0 }}
         />
-        <div
+        <button
+          type="button"
           className="nav-previous"
-          role="button"
           aria-label="Previous"
           onClick={() => {
-            setActiveIndex((index) => (index - 1 + items.length) % items.length);
+            setActiveIndex(
+              (index) => (index - 1 + items.length) % items.length
+            );
             setIsLoading(true);
           }}
+          style={{ background: "none", border: 0, padding: 0 }}
         />
-        <div
+        <button
+          type="button"
           className="nav-next"
-          role="button"
           aria-label="Next"
           onClick={() => {
             setActiveIndex((index) => (index + 1) % items.length);
             setIsLoading(true);
           }}
+          style={{ background: "none", border: 0, padding: 0 }}
         />
         {activeItem.caption ? (
           <div
@@ -430,7 +478,7 @@ const SiteScripts = () => {
         ) : null}
       </div>
     </div>,
-    document.body,
+    document.body
   );
 };
 
