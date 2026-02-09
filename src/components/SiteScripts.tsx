@@ -444,7 +444,18 @@ const SiteScripts = () => {
         aria-modal="true"
         aria-label="Image viewer"
         tabIndex={-1}
-        onClick={(event) => event.stopPropagation()}
+        onClick={(event) => {
+          const target = event.target as HTMLElement;
+          const isInteractiveArea = target.closest(
+            "img, .caption, .caption a, .nav-previous, .nav-next, .closer"
+          );
+
+          if (isInteractiveArea) {
+            return;
+          }
+
+          setIsOpen(false);
+        }}
         onKeyDown={(event) => event.stopPropagation()}
         style={{
           display: "inline-block",
@@ -470,14 +481,18 @@ const SiteScripts = () => {
           type="button"
           className="closer"
           aria-label="Close"
-          onClick={() => setIsOpen(false)}
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsOpen(false);
+          }}
           style={{ background: "none", border: 0, padding: 0 }}
         />
         <button
           type="button"
           className="nav-previous"
           aria-label="Previous"
-          onClick={() => {
+          onClick={(event) => {
+            event.stopPropagation();
             setActiveIndex(
               (index) => (index - 1 + items.length) % items.length
             );
@@ -489,7 +504,8 @@ const SiteScripts = () => {
           type="button"
           className="nav-next"
           aria-label="Next"
-          onClick={() => {
+          onClick={(event) => {
+            event.stopPropagation();
             setActiveIndex((index) => (index + 1) % items.length);
             setIsLoading(true);
           }}
