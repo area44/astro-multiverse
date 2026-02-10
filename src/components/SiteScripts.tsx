@@ -428,6 +428,7 @@ const SiteScripts = () => {
           background: "rgba(0,0,0,0.6)",
           border: 0,
           padding: 0,
+          zIndex: 0,
         }}
       />
       <div
@@ -445,38 +446,39 @@ const SiteScripts = () => {
         aria-label="Image viewer"
         tabIndex={-1}
         onClick={(event) => {
-          const target = event.target as HTMLElement;
-          const isInteractiveArea = target.closest(
-            "img, .caption, .caption a, .nav-previous, .nav-next, .closer"
-          );
-
-          if (isInteractiveArea) {
-            return;
+          if (event.target === event.currentTarget) {
+            setIsOpen(false);
           }
-
-          setIsOpen(false);
         }}
         onKeyDown={(event) => event.stopPropagation()}
         style={{
           display: "inline-block",
           verticalAlign: "middle",
           position: "relative",
-          zIndex: 1,
+          zIndex: 2,
         }}
       >
         {isLoading ? <div className="loader" /> : null}
-        <img
-          alt=""
-          src={activeItem.href}
-          style={{
-            ...maxDimension,
-            height: "auto",
-            width: "auto",
-            display: isLoading ? "none" : "block",
-          }}
-          onLoad={() => setIsLoading(false)}
-          onError={() => setIsLoading(false)}
-        />
+        <button
+          type="button"
+          className="image-hitbox"
+          aria-label="Current image"
+          onClick={(event) => event.stopPropagation()}
+          style={{ background: "none", border: 0, padding: 0 }}
+        >
+          <img
+            alt=""
+            src={activeItem.href}
+            style={{
+              ...maxDimension,
+              height: "auto",
+              width: "auto",
+              display: isLoading ? "none" : "block",
+            }}
+            onLoad={() => setIsLoading(false)}
+            onError={() => setIsLoading(false)}
+          />
+        </button>
         <button
           type="button"
           className="closer"
