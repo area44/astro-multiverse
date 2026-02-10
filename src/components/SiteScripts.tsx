@@ -442,10 +442,10 @@ const SiteScripts = () => {
         tabIndex={-1}
         onClick={(event) => {
           const popup = event.currentTarget as HTMLElement;
-          const imageHitbox = popup.querySelector(".image-hitbox");
+          const imageElement = popup.querySelector("img");
 
-          if (imageHitbox) {
-            const rect = imageHitbox.getBoundingClientRect();
+          if (imageElement) {
+            const rect = imageElement.getBoundingClientRect();
             const insideImageBounds =
               event.clientX >= rect.left &&
               event.clientX <= rect.right &&
@@ -473,16 +473,8 @@ const SiteScripts = () => {
         }}
       >
         {isLoading ? <div className="loader" /> : null}
-        <button
-          type="button"
-          className="image-hitbox"
-          aria-label="Current image"
-          onClick={(event) => event.stopPropagation()}
+        <div
           style={{
-            background: "none",
-            border: 0,
-            padding: 0,
-            cursor: "default",
             maxWidth: "100%",
             maxHeight: "100%",
           }}
@@ -499,7 +491,7 @@ const SiteScripts = () => {
             onLoad={() => setIsLoading(false)}
             onError={() => setIsLoading(false)}
           />
-        </button>
+        </div>
         <button
           type="button"
           className="closer"
