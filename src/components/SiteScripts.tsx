@@ -415,7 +415,10 @@ const SiteScripts = () => {
         position: "fixed",
         inset: 0,
         zIndex: 20000,
-        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: `${windowMargin}px`,
       }}
     >
       <button
@@ -432,30 +435,41 @@ const SiteScripts = () => {
         }}
       />
       <div
-        aria-hidden="true"
-        style={{
-          display: "inline-block",
-          height: "100%",
-          verticalAlign: "middle",
-        }}
-      />
-      <div
         className={`poptrox-popup${isLoading ? " loading" : ""}`}
         role="dialog"
         aria-modal="true"
         aria-label="Image viewer"
         tabIndex={-1}
         onClick={(event) => {
-          if (event.target === event.currentTarget) {
-            setIsOpen(false);
+          const popup = event.currentTarget as HTMLElement;
+          const imageHitbox = popup.querySelector(".image-hitbox");
+
+          if (imageHitbox) {
+            const rect = imageHitbox.getBoundingClientRect();
+            const insideImageBounds =
+              event.clientX >= rect.left &&
+              event.clientX <= rect.right &&
+              event.clientY >= rect.top &&
+              event.clientY <= rect.bottom;
+
+            if (insideImageBounds) {
+              return;
+            }
           }
+
+          setIsOpen(false);
         }}
         onKeyDown={(event) => event.stopPropagation()}
         style={{
-          display: "inline-block",
-          verticalAlign: "middle",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           position: "relative",
           zIndex: 2,
+          maxWidth: "100%",
+          maxHeight: "100%",
+          padding: "2rem",
+          boxSizing: "border-box",
         }}
       >
         {isLoading ? <div className="loader" /> : null}
@@ -464,7 +478,14 @@ const SiteScripts = () => {
           className="image-hitbox"
           aria-label="Current image"
           onClick={(event) => event.stopPropagation()}
-          style={{ background: "none", border: 0, padding: 0 }}
+          style={{
+            background: "none",
+            border: 0,
+            padding: 0,
+            cursor: "default",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
         >
           <img
             alt=""
