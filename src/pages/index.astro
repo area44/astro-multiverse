@@ -1,9 +1,7 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
 import ExternalScripts from "@/components/ExternalScripts.astro";
-import Footer from "@/components/Footer.astro";
 import Gallery from "@/components/Gallery.astro";
-import Header from "@/components/Header.astro";
 
 let title = "Multiverse by HTML5 UP";
 let description =
@@ -21,8 +19,6 @@ let description =
 
   <body class="is-preload">
     <div id="wrapper">
-      <Header title={title} />
-      <Footer title={title} description={description} />
       <Gallery />
     </div>
     <ExternalScripts />

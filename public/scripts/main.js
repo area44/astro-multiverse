@@ -123,49 +123,6 @@
     }
   });
 
-  // Header.
-  var $header = $("#header");
-
-  // Links.
-  $header.find("a").each(function () {
-    var $this = $(this),
-      href = $this.attr("href");
-
-    // Internal link? Skip.
-    if (!href || href.charAt(0) == "#") return;
-
-    // Redirect on click.
-    $this
-      .removeAttr("href")
-      .css("cursor", "pointer")
-      .on("click", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        window.location.href = href;
-      });
-  });
-
-  // Footer.
-  var $footer = $("#footer");
-
-  // Copyright.
-  // This basically just moves the copyright line to the end of the *last* sibling of its current parent
-  // when the "medium" breakpoint activates, and moves it back when it deactivates.
-  $footer.find(".copyright").each(function () {
-    var $this = $(this),
-      $parent = $this.parent(),
-      $lastParent = $parent.parent().children().last();
-
-    breakpoints.on("<=medium", function () {
-      $this.appendTo($lastParent);
-    });
-
-    breakpoints.on(">medium", function () {
-      $this.appendTo($parent);
-    });
-  });
-
   // Main.
   var $main = $("#main");
 

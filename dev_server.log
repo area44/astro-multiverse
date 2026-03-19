@@ -1,0 +1,40 @@
+
+> @area44/astro-multiverse@25.03.15 dev
+> astro dev
+
+[vite] connected.
+18:30:18 [types] Generated 1ms
+18:30:18 [WARN] [content] Content config not loaded
+18:30:18 [vite] Re-optimizing dependencies because vite config has changed
+ astro  v6.0.6 ready in 1790 ms
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+18:30:18 watching for file changes...
+18:30:43 [200] / 54ms
+18:30:43 [vite] ✨ new dependencies optimized: astro/runtime/client/dev-toolbar/entrypoint.js
+18:30:43 [vite] ✨ optimized dependencies changed. reloading
+18:30:44 [200] /_image 263ms
+18:30:44 [200] /_image 342ms
+18:30:44 [200] /_image 348ms
+18:30:44 [200] /_image 443ms
+18:30:44 [200] /_image 552ms
+18:30:44 [200] /_image 691ms
+18:30:44 [200] /_image 315ms
+18:30:44 [200] /_image 357ms
+18:30:44 [200] /_image 349ms
+18:30:45 [200] /_image 414ms
+18:30:45 [200] /_image 450ms
+18:30:45 [200] /_image 393ms
+18:31:08 [200] / 6ms
+18:31:08 [200] /_image 185ms
+18:31:08 [200] /_image 175ms
+18:31:08 [200] /_image 187ms
+18:31:08 [200] /_image 195ms
+18:31:08 [200] /_image 314ms
+18:31:09 [200] /_image 413ms
+18:31:09 [200] /_image 254ms
+18:31:09 [200] /_image 274ms
+18:31:09 [200] /_image 403ms
+18:31:09 [200] /_image 398ms
+18:31:09 [200] /_image 285ms
+18:31:09 [200] /_image 263ms
