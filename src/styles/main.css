@@ -422,7 +422,7 @@ hr.major {
   background-repeat: no-repeat;
   background-size: 3em;
   height: 5em;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   right: 0;
   top: 0;
@@ -440,7 +440,7 @@ hr.major {
   cursor: pointer;
   height: 8em;
   margin-top: -4em;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   top: 50%;
   width: 6em;
@@ -548,7 +548,7 @@ body.touch .poptrox-popup .nav-next {
   .poptrox-popup .closer,
   .poptrox-popup .nav-previous,
   .poptrox-popup .nav-next {
-    display: none;
+    display: block;
   }
 }
 
@@ -980,7 +980,7 @@ body.is-preload #main .thumb {
   #wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
   #wrapper + .poptrox-overlay .poptrox-popup .nav-next,
   #wrapper + .poptrox-overlay .poptrox-popup .closer {
-    display: none;
+    display: block;
   }
 }
 

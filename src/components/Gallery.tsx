@@ -80,8 +80,8 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     };
 
     return (
-      <button
-        type="button"
+      // biome-ignore lint/a11y/useSemanticElements: Overlay needs to be a div to avoid nested buttons
+      <div
         className="poptrox-overlay"
         style={{
           position: "fixed",
@@ -95,11 +95,15 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "rgba(0,0,0,0.85)",
-          border: 0,
-          padding: 0,
-          outline: "none",
         }}
         onClick={closeLightbox}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            closeLightbox();
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
         <div
           className={`poptrox-popup ${loading ? "loading" : ""}`}
@@ -173,7 +177,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               cursor: "pointer",
               border: 0,
               background: "transparent",
-              zIndex: 10,
+              zIndex: 100,
               opacity: 1,
               position: "absolute",
               top: 0,
@@ -198,7 +202,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               cursor: "pointer",
               border: 0,
               background: "transparent",
-              zIndex: 10,
+              zIndex: 100,
               opacity: 1,
               position: "absolute",
               top: "50%",
@@ -225,7 +229,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               cursor: "pointer",
               border: 0,
               background: "transparent",
-              zIndex: 10,
+              zIndex: 100,
               opacity: 1,
               position: "absolute",
               top: "50%",
@@ -241,7 +245,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             aria-label="Next"
           />
         </div>
-      </button>
+      </div>
     );
   };
 
