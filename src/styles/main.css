@@ -970,3 +970,30 @@ body.is-preload #main .thumb {
     max-height: 80vh;
   }
 }
+
+/* Responsive React Lightbox refinements */
+@media screen and (max-width: 736px) {
+  #wrapper + .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 100vw;
+    max-height: calc(100vh - 100px);
+  }
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-next,
+  #wrapper + .poptrox-overlay .poptrox-popup .closer {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 737px) and (max-width: 980px) {
+  #wrapper + .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  #wrapper + .poptrox-overlay .poptrox-popup .closer {
+    background-size: 3em;
+  }
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-next {
+    background-size: 4em;
+  }
+}

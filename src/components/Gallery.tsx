@@ -107,9 +107,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           aria-modal="true"
           style={{
             position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: "inline-block",
             cursor: "default",
             pointerEvents: "auto",
             zIndex: 1,
@@ -118,10 +116,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             border: 0,
             padding: 0,
             margin: 0,
-            width: "auto",
-            height: "auto",
-            maxWidth: "100vw",
-            maxHeight: "100vh",
           }}
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => {
@@ -150,12 +144,15 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               alt=""
               className="lightbox-img"
               style={{
+                maxWidth: "85vw",
+                maxHeight: "85vh",
+                objectFit: "contain",
                 transition: "opacity 0.3s ease-in-out",
                 opacity: loading ? 0 : 1,
                 display: "block",
                 position: "relative",
                 zIndex: 2,
-                pointerEvents: "none", // Prevent clicks on image from closing
+                pointerEvents: "none",
                 boxShadow: "none",
                 border: 0,
               }}
@@ -177,16 +174,16 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               border: 0,
               background: "transparent",
               zIndex: 10,
-              opacity: 0.8,
-              position: "fixed",
-              top: "20px",
-              right: "20px",
-              width: "4em",
-              height: "4em",
+              opacity: 1,
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: "5em",
+              height: "5em",
               backgroundImage: 'url("/images/close.svg")',
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              backgroundSize: "2.5em",
+              backgroundSize: "3em",
             }}
             aria-label="Close"
           />
@@ -202,17 +199,17 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               border: 0,
               background: "transparent",
               zIndex: 10,
-              opacity: 0.8,
-              position: "fixed",
+              opacity: 1,
+              position: "absolute",
               top: "50%",
-              left: "20px",
-              width: "5em",
+              left: 0,
+              width: "6em",
               height: "8em",
               marginTop: "-4em",
               backgroundImage: 'url("/images/arrow.svg")',
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              backgroundSize: "4em",
+              backgroundSize: "5em",
               transform: "scaleX(-1)",
             }}
             aria-label="Previous"
@@ -229,17 +226,17 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               border: 0,
               background: "transparent",
               zIndex: 10,
-              opacity: 0.8,
-              position: "fixed",
+              opacity: 1,
+              position: "absolute",
               top: "50%",
-              right: "20px",
-              width: "5em",
+              right: 0,
+              width: "6em",
               height: "8em",
               marginTop: "-4em",
               backgroundImage: 'url("/images/arrow.svg")',
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              backgroundSize: "4em",
+              backgroundSize: "5em",
             }}
             aria-label="Next"
           />
