@@ -82,101 +82,146 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     };
 
     return (
-      <div
-        className={`poptrox-popup ${loading ? "loading" : ""}`}
-        role="dialog"
-        aria-modal="true"
+      <button
+        type="button"
+        className="poptrox-overlay"
         style={{
           position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "calc(100% - 100px)",
-          height: "calc(100% - 100px)",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
           zIndex: 20000,
+          cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          maxWidth: "100%",
-          maxHeight: "100%",
+          backgroundColor: "transparent",
+          border: 0,
+          padding: 0,
+          outline: "none",
         }}
         onClick={closeLightbox}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            closeLightbox();
-          }
-        }}
-        tabIndex={-1}
       >
         <div
-          className="pic"
+          className={`poptrox-popup ${loading ? "loading" : ""}`}
+          role="dialog"
+          aria-modal="true"
           style={{
             position: "relative",
-            width: "100%",
-            height: "100%",
+            width: "auto",
+            height: "auto",
+            minWidth: "200px",
+            minHeight: "200px",
+            maxWidth: "calc(100% - 100px)",
+            maxHeight: "calc(100% - 100px)",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            cursor: "default",
+            pointerEvents: "auto",
+            zIndex: 1,
           }}
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.stopPropagation();
+            }
+          }}
+          tabIndex={-1}
         >
-          <img
-            ref={imageRef}
-            src={currentImage.src}
-            alt={currentImage.title || ""}
+          <div
+            className="pic"
             style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               maxWidth: "100%",
               maxHeight: "100%",
-              objectFit: "contain",
-              transition: "opacity 0.3s ease-in-out",
-              opacity: loading ? 0 : 1,
+              zIndex: 1,
             }}
-            onLoad={handleImageLoad}
-            onClick={(e) => e.stopPropagation()}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") e.stopPropagation();
+          >
+            <img
+              ref={imageRef}
+              src={currentImage.src}
+              alt={currentImage.title || ""}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+                transition: "opacity 0.3s ease-in-out",
+                opacity: loading ? 0 : 1,
+                display: "block",
+                position: "relative",
+                zIndex: 2,
+                pointerEvents: "auto",
+              }}
+              onLoad={handleImageLoad}
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") e.stopPropagation();
+              }}
+            />
+          </div>
+
+          {loading && <div className="loader" />}
+
+          {!loading && currentImage.title && (
+            <div
+              className="caption"
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
+              role="document"
+              style={{ zIndex: 2 }}
+            >
+              <h2>{currentImage.title}</h2>
+              {currentImage.description && <p>{currentImage.description}</p>}
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="closer"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
             }}
+            style={{
+              cursor: "pointer",
+              border: 0,
+              background: "transparent",
+              zIndex: 3,
+            }}
+            aria-label="Close"
+          />
+          <button
+            type="button"
+            className="nav-previous"
+            onClick={navigatePrev}
+            style={{
+              cursor: "pointer",
+              border: 0,
+              background: "transparent",
+              zIndex: 3,
+            }}
+            aria-label="Previous"
+          />
+          <button
+            type="button"
+            className="nav-next"
+            onClick={navigateNext}
+            style={{
+              cursor: "pointer",
+              border: 0,
+              background: "transparent",
+              zIndex: 3,
+            }}
+            aria-label="Next"
           />
         </div>
-
-        {loading && <div className="loader" />}
-
-        {!loading && currentImage.title && (
-          <div
-            className="caption"
-            onClick={(e) => e.stopPropagation()}
-            onKeyDown={(e) => e.stopPropagation()}
-            role="document"
-          >
-            <h2>{currentImage.title}</h2>
-            {currentImage.description && <p>{currentImage.description}</p>}
-          </div>
-        )}
-
-        <button
-          type="button"
-          className="closer"
-          onClick={(e) => {
-            e.stopPropagation();
-            closeLightbox();
-          }}
-          style={{ cursor: "pointer", border: 0, background: "transparent" }}
-          aria-label="Close"
-        />
-        <button
-          type="button"
-          className="nav-previous"
-          onClick={navigatePrev}
-          style={{ cursor: "pointer", border: 0, background: "transparent" }}
-          aria-label="Previous"
-        />
-        <button
-          type="button"
-          className="nav-next"
-          onClick={navigateNext}
-          style={{ cursor: "pointer", border: 0, background: "transparent" }}
-          aria-label="Next"
-        />
-      </div>
+      </button>
     );
   };
 
