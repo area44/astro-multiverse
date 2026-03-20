@@ -422,7 +422,7 @@ hr.major {
   background-repeat: no-repeat;
   background-size: 3em;
   height: 5em;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   right: 0;
   top: 0;
@@ -440,7 +440,7 @@ hr.major {
   cursor: pointer;
   height: 8em;
   margin-top: -4em;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   top: 50%;
   width: 6em;
@@ -548,7 +548,7 @@ body.touch .poptrox-popup .nav-next {
   .poptrox-popup .closer,
   .poptrox-popup .nav-previous,
   .poptrox-popup .nav-next {
-    display: none;
+    display: block;
   }
 }
 
@@ -916,5 +916,84 @@ body.is-preload #main .thumb {
 
   #main .thumb:nth-child(3) {
     transition-delay: 0.95s;
+  }
+}
+
+/* Custom React Lightbox Styles */
+.poptrox-popup .pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* Specificity boost to avoid !important */
+#wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
+#wrapper + .poptrox-overlay .poptrox-popup .nav-next,
+#wrapper + .poptrox-overlay .poptrox-popup .closer {
+  display: block;
+}
+
+@media screen and (max-width: 480px) {
+  .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+  .poptrox-overlay .poptrox-popup .nav-previous,
+  .poptrox-overlay .poptrox-popup .nav-next {
+    width: 3em;
+    height: 5em;
+    background-size: 2.5em;
+    left: 5px;
+  }
+  .poptrox-overlay .poptrox-popup .nav-next {
+    left: auto;
+    right: 5px;
+  }
+  .poptrox-overlay .poptrox-popup .closer {
+    width: 3em;
+    height: 3em;
+    background-size: 2em;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 80vw;
+    max-height: 80vh;
+  }
+}
+
+/* Responsive React Lightbox refinements */
+@media screen and (max-width: 736px) {
+  #wrapper + .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 100vw;
+    max-height: calc(100vh - 100px);
+  }
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-next,
+  #wrapper + .poptrox-overlay .poptrox-popup .closer {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 737px) and (max-width: 980px) {
+  #wrapper + .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  #wrapper + .poptrox-overlay .poptrox-popup .closer {
+    background-size: 3em;
+  }
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
+  #wrapper + .poptrox-overlay .poptrox-popup .nav-next {
+    background-size: 4em;
   }
 }

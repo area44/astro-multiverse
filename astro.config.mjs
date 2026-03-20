@@ -1,3 +1,4 @@
+import react from "@astrojs/react";
 import { defineConfig } from "astro/config";
 import { FontaineTransform } from "fontaine";
 
@@ -12,6 +13,7 @@ const base = process.env.BASE || "/";
 export default defineConfig({
   site,
   base,
+
   vite: {
     plugins: [
       FontaineTransform.vite({
@@ -20,4 +22,6 @@ export default defineConfig({
       }),
     ],
   },
+
+  integrations: [react()],
 });

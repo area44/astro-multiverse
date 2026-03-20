@@ -1,11 +1,39 @@
 ---
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import BaseHead from "@/components/BaseHead.astro";
-import ExternalScripts from "@/components/ExternalScripts.astro";
-import Gallery from "@/components/Gallery.astro";
+import Gallery from "@/components/Gallery.tsx";
 
-let title = "Multiverse by HTML5 UP";
-let description =
+const title = "Multiverse by HTML5 UP";
+const description =
   "Say hello to Multiverse, a slick, one-page gallery design with a fully functional lightbox.";
+
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*"
+);
+const imageData = await Promise.all(
+  Object.keys(imageFiles).map(async (path) => {
+    const imageModule = await imageFiles[path]();
+    const image = imageModule.default;
+
+    const optimizedFull = await getImage({
+      src: image,
+      width: 1200,
+    });
+
+    const optimizedThumb = await getImage({
+      src: image,
+      width: 750,
+      height: 750,
+      format: "webp",
+    });
+
+    return {
+      src: optimizedFull.src,
+      thumbnail: optimizedThumb.src,
+    };
+  })
+);
 ---
 
 <!doctype html>
@@ -19,8 +47,7 @@ let description =
 
   <body class="is-preload">
     <div id="wrapper">
-      <Gallery />
+      <Gallery images={imageData} client:load />
     </div>
-    <ExternalScripts />
   </body>
 </html>
