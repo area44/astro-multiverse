@@ -83,19 +83,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       // biome-ignore lint/a11y/useSemanticElements: Overlay needs to be a div to avoid nested buttons
       <div
         className="poptrox-overlay"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          zIndex: 20000,
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "rgba(0,0,0,0.85)",
-        }}
         onClick={closeLightbox}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -109,18 +96,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           className={`poptrox-popup ${loading ? "loading" : ""}`}
           role="dialog"
           aria-modal="true"
-          style={{
-            position: "relative",
-            display: "inline-block",
-            cursor: "default",
-            pointerEvents: "auto",
-            zIndex: 1,
-            backgroundColor: "transparent",
-            boxShadow: "none",
-            border: 0,
-            padding: 0,
-            margin: 0,
-          }}
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -129,36 +104,14 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           }}
           tabIndex={-1}
         >
-          <div
-            className="pic"
-            style={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              maxWidth: "100%",
-              maxHeight: "100%",
-              zIndex: 1,
-              padding: 0,
-            }}
-          >
+          <div className="pic">
             <img
               ref={imageRef}
               src={currentImage.src}
               alt=""
               className="lightbox-img"
               style={{
-                maxWidth: "85vw",
-                maxHeight: "85vh",
-                objectFit: "contain",
-                transition: "opacity 0.3s ease-in-out",
                 opacity: loading ? 0 : 1,
-                display: "block",
-                position: "relative",
-                zIndex: 2,
-                pointerEvents: "none",
-                boxShadow: "none",
-                border: 0,
               }}
               onLoad={handleImageLoad}
             />
@@ -173,22 +126,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               e.stopPropagation();
               closeLightbox();
             }}
-            style={{
-              cursor: "pointer",
-              border: 0,
-              background: "transparent",
-              zIndex: 100,
-              opacity: 1,
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: "5em",
-              height: "5em",
-              backgroundImage: 'url("/images/close.svg")',
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "3em",
-            }}
             aria-label="Close"
           />
           <button
@@ -198,24 +135,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               e.stopPropagation();
               navigatePrev();
             }}
-            style={{
-              cursor: "pointer",
-              border: 0,
-              background: "transparent",
-              zIndex: 100,
-              opacity: 1,
-              position: "absolute",
-              top: "50%",
-              left: 0,
-              width: "6em",
-              height: "8em",
-              marginTop: "-4em",
-              backgroundImage: 'url("/images/arrow.svg")',
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "5em",
-              transform: "scaleX(-1)",
-            }}
             aria-label="Previous"
           />
           <button
@@ -224,23 +143,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             onClick={(e) => {
               e.stopPropagation();
               navigateNext();
-            }}
-            style={{
-              cursor: "pointer",
-              border: 0,
-              background: "transparent",
-              zIndex: 100,
-              opacity: 1,
-              position: "absolute",
-              top: "50%",
-              right: 0,
-              width: "6em",
-              height: "8em",
-              marginTop: "-4em",
-              backgroundImage: 'url("/images/arrow.svg")',
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "5em",
             }}
             aria-label="Next"
           />
@@ -263,10 +165,9 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               }}
               style={{
                 backgroundImage: `url(${img.thumbnail})`,
-                cursor: "pointer",
               }}
             >
-              <img src={img.thumbnail} alt="" style={{ display: "none" }} />
+              <img src={img.thumbnail} alt="" className="hidden" />
             </a>
           </article>
         ))}

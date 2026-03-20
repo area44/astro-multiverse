@@ -1,4 +1,5 @@
 import react from "@astrojs/react";
+import tailwind from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { FontaineTransform } from "fontaine";
 
@@ -16,6 +17,7 @@ export default defineConfig({
 
   vite: {
     plugins: [
+      tailwind(),
       FontaineTransform.vite({
         fallbacks: ["Arial"],
         resolvePath: (id) => new URL(`./public${id}`, import.meta.url),
