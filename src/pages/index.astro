@@ -16,6 +16,13 @@ const imageData = await Promise.all(
     const imageModule = await imageFiles[path]();
     const image = imageModule.default;
 
+    // Extract a simple title from filename
+    const fileName = path.split("/").pop()?.split(".")[0] || "Image";
+    const formattedTitle = fileName
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
     const optimizedFull = await getImage({
       src: image,
       width: 1200,
@@ -31,6 +38,8 @@ const imageData = await Promise.all(
     return {
       src: optimizedFull.src,
       thumbnail: optimizedThumb.src,
+      title: formattedTitle,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     };
   })
 );

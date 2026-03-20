@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 interface ImageData {
   src: string;
   thumbnail: string;
+  title?: string;
+  description?: string;
 }
 
 interface GalleryProps {
@@ -12,10 +15,11 @@ interface GalleryProps {
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Play initial animations on page load.
+    setIsMounted(true);
     const timer = setTimeout(() => {
       document.body.classList.remove("is-preload");
     }, 100);
@@ -33,6 +37,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
     setIsOpen(true);
+    setLoading(true);
   };
 
   const closeLightbox = useCallback(() => {
@@ -43,6 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     (e?: React.MouseEvent | KeyboardEvent) => {
       if (e && "stopPropagation" in e) e.stopPropagation();
       setCurrentIndex((prev) => (prev + 1) % images.length);
+      setLoading(true);
     },
     [images.length]
   );
@@ -51,6 +57,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     (e?: React.MouseEvent | KeyboardEvent) => {
       if (e && "stopPropagation" in e) e.stopPropagation();
       setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      setLoading(true);
     },
     [images.length]
   );
@@ -66,13 +73,111 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, navigateNext, navigatePrev, closeLightbox]);
 
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (
-      e.target === overlayRef.current ||
-      (e.target as HTMLElement).classList.contains("pic")
-    ) {
-      closeLightbox();
-    }
+  const Lightbox = () => {
+    const currentImage = images[currentIndex];
+    const imageRef = useRef<HTMLImageElement>(null);
+
+    const handleImageLoad = () => {
+      setLoading(false);
+    };
+
+    return (
+      <div
+        className={`poptrox-popup ${loading ? "loading" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "calc(100% - 100px)",
+          height: "calc(100% - 100px)",
+          zIndex: 20000,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          maxWidth: "100%",
+          maxHeight: "100%",
+        }}
+        onClick={closeLightbox}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            closeLightbox();
+          }
+        }}
+        tabIndex={-1}
+      >
+        <div
+          className="pic"
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            ref={imageRef}
+            src={currentImage.src}
+            alt={currentImage.title || ""}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              objectFit: "contain",
+              transition: "opacity 0.3s ease-in-out",
+              opacity: loading ? 0 : 1,
+            }}
+            onLoad={handleImageLoad}
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") e.stopPropagation();
+            }}
+          />
+        </div>
+
+        {loading && <div className="loader" />}
+
+        {!loading && currentImage.title && (
+          <div
+            className="caption"
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+            role="document"
+          >
+            <h2>{currentImage.title}</h2>
+            {currentImage.description && <p>{currentImage.description}</p>}
+          </div>
+        )}
+
+        <button
+          type="button"
+          className="closer"
+          onClick={(e) => {
+            e.stopPropagation();
+            closeLightbox();
+          }}
+          style={{ cursor: "pointer", border: 0, background: "transparent" }}
+          aria-label="Close"
+        />
+        <button
+          type="button"
+          className="nav-previous"
+          onClick={navigatePrev}
+          style={{ cursor: "pointer", border: 0, background: "transparent" }}
+          aria-label="Previous"
+        />
+        <button
+          type="button"
+          className="nav-next"
+          onClick={navigateNext}
+          style={{ cursor: "pointer", border: 0, background: "transparent" }}
+          aria-label="Next"
+        />
+      </div>
+    );
   };
 
   return (
@@ -94,88 +199,19 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             >
               <img
                 src={img.thumbnail}
-                alt="Astro Multiverse"
+                alt={img.title || "Astro Multiverse"}
                 style={{ display: "none" }}
               />
             </a>
+            {img.title && <h2>{img.title}</h2>}
+            {img.description && (
+              <p style={{ display: "none" }}>{img.description}</p>
+            )}
           </article>
         ))}
       </div>
 
-      {isOpen && (
-        <div
-          className="poptrox-popup"
-          role="dialog"
-          aria-modal="true"
-          ref={overlayRef}
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "calc(100% - 100px)",
-            height: "calc(100% - 100px)",
-            zIndex: 20000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            maxWidth: "100%",
-            maxHeight: "100%",
-          }}
-          onClick={handleOverlayClick}
-          onKeyDown={(e) => {
-            if (e.key === "Escape") closeLightbox();
-          }}
-          tabIndex={-1}
-        >
-          <div
-            className="pic"
-            style={{
-              position: "relative",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={images[currentIndex].src}
-              alt=""
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-              }}
-            />
-          </div>
-
-          <button
-            type="button"
-            className="closer"
-            onClick={(e) => {
-              e.stopPropagation();
-              closeLightbox();
-            }}
-            style={{ cursor: "pointer", border: 0, background: "transparent" }}
-            aria-label="Close"
-          />
-          <button
-            type="button"
-            className="nav-previous"
-            onClick={navigatePrev}
-            style={{ cursor: "pointer", border: 0, background: "transparent" }}
-            aria-label="Previous"
-          />
-          <button
-            type="button"
-            className="nav-next"
-            onClick={navigateNext}
-            style={{ cursor: "pointer", border: 0, background: "transparent" }}
-            aria-label="Next"
-          />
-        </div>
-      )}
+      {isOpen && isMounted && createPortal(<Lightbox />, document.body)}
     </>
   );
 };
