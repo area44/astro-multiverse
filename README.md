@@ -2,7 +2,15 @@
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 
-Say hello to **Multiverse**, a slick, one-page gallery design with a fully functional lightbox.
+Say hello to **Multiverse**, a slick, one-page gallery design with a fully functional lightbox. Re-imagined with Astro 6, React 19, and Tailwind CSS v4.
+
+## Tech Stack
+
+- **[Astro 6](https://astro.build)** - Modern web framework for content-driven websites.
+- **[React 19](https://react.dev)** - Powering the gallery and lightbox with modern React features and Portals.
+- **[Tailwind CSS v4](https://tailwindcss.com)** - Next-generation utility-first CSS framework.
+- **[Oxlint](https://oxc.rs/docs/guide/usage/linter)** - High-performance JavaScript/TypeScript linter.
+- **[Oxfmt](https://oxc.rs/docs/guide/usage/formatter)** - Ultra-fast code formatter.
 
 ## Getting Started
 
@@ -17,19 +25,20 @@ pnpm dev
 
 ## How to Customize
 
-To customize Astro Multiverse, you can change your images in the `src/assets` directory.
+- **Images**: Change your images in the `src/assets` directory.
+- **Metadata**: Update site metadata in `src/components/BaseHead.astro`.
+- **Styling**: Customize styles in `src/styles/global.css` using Tailwind CSS v4 directives.
 
 ## License
 
-**Multivese** by [HTML5 UP](https://html5up.net). Free for personal and commercial use under the [CCA 3.0](https://html5up.net/license) license.
+**Multiverse** by [HTML5 UP](https://html5up.net). Free for personal and commercial use under the [CCA 3.0](https://html5up.net/license) license.
 
 ## Credits
 
-Astro Multiverse uses the following resources:
+Astro Multiverse re-imagines the original template without legacy dependencies:
 
+- Original design by [HTML5 UP](https://html5up.net)
 - Demo images by [Unsplash](https://unsplash.com)
-- [jQuery](https://jquery.com)
-- [Poptrox](https://github.com/ajlkn/jquery.poptrox)
 
 ## Contributions
 
