@@ -4,8 +4,6 @@ import { createPortal } from "react-dom";
 interface ImageData {
   src: string;
   thumbnail: string;
-  title?: string;
-  description?: string;
 }
 
 interface GalleryProps {
@@ -89,14 +87,14 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           position: "fixed",
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
+          width: "100vw",
+          height: "100vh",
           zIndex: 20000,
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(0,0,0,0.85)",
           border: 0,
           padding: 0,
           outline: "none",
@@ -109,19 +107,21 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           aria-modal="true"
           style={{
             position: "relative",
-            width: "auto",
-            height: "auto",
-            minWidth: "200px",
-            minHeight: "200px",
-            maxWidth: "calc(100% - 100px)",
-            maxHeight: "calc(100% - 100px)",
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             cursor: "default",
             pointerEvents: "auto",
             zIndex: 1,
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            border: 0,
+            padding: 0,
+            margin: 0,
+            width: "auto",
+            height: "auto",
+            maxWidth: "100vw",
+            maxHeight: "100vh",
           }}
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => {
@@ -141,45 +141,29 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               maxWidth: "100%",
               maxHeight: "100%",
               zIndex: 1,
+              padding: 0,
             }}
           >
             <img
               ref={imageRef}
               src={currentImage.src}
-              alt={currentImage.title || ""}
+              alt=""
+              className="lightbox-img"
               style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
                 transition: "opacity 0.3s ease-in-out",
                 opacity: loading ? 0 : 1,
                 display: "block",
                 position: "relative",
                 zIndex: 2,
-                pointerEvents: "auto",
+                pointerEvents: "none", // Prevent clicks on image from closing
+                boxShadow: "none",
+                border: 0,
               }}
               onLoad={handleImageLoad}
-              onClick={(e) => e.stopPropagation()}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") e.stopPropagation();
-              }}
             />
           </div>
 
           {loading && <div className="loader" />}
-
-          {!loading && currentImage.title && (
-            <div
-              className="caption"
-              onClick={(e) => e.stopPropagation()}
-              onKeyDown={(e) => e.stopPropagation()}
-              role="document"
-              style={{ zIndex: 2 }}
-            >
-              <h2>{currentImage.title}</h2>
-              {currentImage.description && <p>{currentImage.description}</p>}
-            </div>
-          )}
 
           <button
             type="button"
@@ -192,31 +176,70 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
               cursor: "pointer",
               border: 0,
               background: "transparent",
-              zIndex: 3,
+              zIndex: 10,
+              opacity: 0.8,
+              position: "fixed",
+              top: "20px",
+              right: "20px",
+              width: "4em",
+              height: "4em",
+              backgroundImage: 'url("/images/close.svg")',
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "2.5em",
             }}
             aria-label="Close"
           />
           <button
             type="button"
             className="nav-previous"
-            onClick={navigatePrev}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigatePrev();
+            }}
             style={{
               cursor: "pointer",
               border: 0,
               background: "transparent",
-              zIndex: 3,
+              zIndex: 10,
+              opacity: 0.8,
+              position: "fixed",
+              top: "50%",
+              left: "20px",
+              width: "5em",
+              height: "8em",
+              marginTop: "-4em",
+              backgroundImage: 'url("/images/arrow.svg")',
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "4em",
+              transform: "scaleX(-1)",
             }}
             aria-label="Previous"
           />
           <button
             type="button"
             className="nav-next"
-            onClick={navigateNext}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateNext();
+            }}
             style={{
               cursor: "pointer",
               border: 0,
               background: "transparent",
-              zIndex: 3,
+              zIndex: 10,
+              opacity: 0.8,
+              position: "fixed",
+              top: "50%",
+              right: "20px",
+              width: "5em",
+              height: "8em",
+              marginTop: "-4em",
+              backgroundImage: 'url("/images/arrow.svg")',
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "4em",
             }}
             aria-label="Next"
           />
@@ -242,16 +265,8 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                 cursor: "pointer",
               }}
             >
-              <img
-                src={img.thumbnail}
-                alt={img.title || "Astro Multiverse"}
-                style={{ display: "none" }}
-              />
+              <img src={img.thumbnail} alt="" style={{ display: "none" }} />
             </a>
-            {img.title && <h2>{img.title}</h2>}
-            {img.description && (
-              <p style={{ display: "none" }}>{img.description}</p>
-            )}
           </article>
         ))}
       </div>

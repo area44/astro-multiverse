@@ -918,3 +918,55 @@ body.is-preload #main .thumb {
     transition-delay: 0.95s;
   }
 }
+
+/* Custom React Lightbox Styles */
+.poptrox-popup .pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* Specificity boost to avoid !important */
+#wrapper + .poptrox-overlay .poptrox-popup .nav-previous,
+#wrapper + .poptrox-overlay .poptrox-popup .nav-next,
+#wrapper + .poptrox-overlay .poptrox-popup .closer {
+  display: block;
+}
+
+@media screen and (max-width: 480px) {
+  .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+  .poptrox-overlay .poptrox-popup .nav-previous,
+  .poptrox-overlay .poptrox-popup .nav-next {
+    width: 3em;
+    height: 5em;
+    background-size: 2.5em;
+    left: 5px;
+  }
+  .poptrox-overlay .poptrox-popup .nav-next {
+    left: auto;
+    right: 5px;
+  }
+  .poptrox-overlay .poptrox-popup .closer {
+    width: 3em;
+    height: 3em;
+    background-size: 2em;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .poptrox-overlay .poptrox-popup .lightbox-img {
+    max-width: 80vw;
+    max-height: 80vh;
+  }
+}
