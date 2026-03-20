@@ -12,9 +12,9 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "start": "astro dev",
-    "format": "biome format --write .",
-    "lint": "biome lint --write .",
-    "check": "biome check --write ."
+    "format": "oxfmt",
+    "lint": "oxlint --fix",
+    "check": "oxlint . && oxfmt --check ."
   },
   "dependencies": {
     "@astrojs/react": "^5.0.1",
@@ -29,7 +29,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
-    "@area44/biome-config": "^2.3.3",
-    "@biomejs/biome": "^2.4.7"
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0"
   }
 }

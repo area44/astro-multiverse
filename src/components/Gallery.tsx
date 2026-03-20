@@ -48,7 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
       setLoading(true);
     },
-    [images.length]
+    [images.length],
   );
 
   const navigatePrev = useCallback(
@@ -57,7 +57,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
       setLoading(true);
     },
-    [images.length]
+    [images.length],
   );
 
   useEffect(() => {
