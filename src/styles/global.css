@@ -272,12 +272,12 @@
   }
 
   .closer {
-    @apply absolute top-0 right-0 w-20 h-20 cursor-pointer bg-transparent border-0 z-[100] bg-[url('/images/close.svg')] bg-center bg-no-repeat bg-[length:3em] opacity-0 hover:!opacity-100 transition-opacity;
+    @apply absolute top-0 right-0 w-20 h-20 cursor-pointer bg-transparent border-0 z-[100] bg-[url('/images/close.svg')] bg-center bg-no-repeat bg-[length:3em] opacity-0 hover:!opacity-100 transition-opacity duration-500;
   }
 
   .nav-previous,
   .nav-next {
-    @apply absolute top-1/2 w-24 h-32 -mt-16 cursor-pointer bg-transparent border-0 z-[100] bg-[url('/images/arrow.svg')] bg-center bg-no-repeat bg-[length:5em] opacity-0 hover:!opacity-100 transition-opacity;
+    @apply absolute top-1/2 w-24 h-32 -mt-16 cursor-pointer bg-transparent border-0 z-[100] bg-[url('/images/arrow.svg')] bg-center bg-no-repeat bg-[length:5em] opacity-0 hover:!opacity-100 transition-opacity duration-500;
   }
 
   .nav-previous {
