@@ -31,13 +31,14 @@ pnpm dev
 
 ## License
 
-**Multiverse** by [HTML5 UP](https://html5up.net). Free for personal and commercial use under the [CCA 3.0](https://html5up.net/license) license.
+**Multiverse** by [AREA44](https://github.com/AREA44). Inspired by the original design from [HTML5 UP](https://html5up.net). Free for personal and commercial use under the [CCA 3.0](https://html5up.net/license) license.
 
 ## Credits
 
 Astro Multiverse re-imagines the original template without legacy dependencies:
 
 - Original design by [HTML5 UP](https://html5up.net)
+- Re-imagined by [AREA44](https://github.com/AREA44)
 - Demo images by [Unsplash](https://unsplash.com)
 
 ## Contributions
