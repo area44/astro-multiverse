@@ -119,33 +119,37 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
           {loading && <div className="loader" />}
 
-          <button
-            type="button"
-            className="closer"
-            onClick={(e) => {
-              e.stopPropagation();
-              closeLightbox();
-            }}
-            aria-label="Close"
-          />
-          <button
-            type="button"
-            className="nav-previous"
-            onClick={(e) => {
-              e.stopPropagation();
-              navigatePrev();
-            }}
-            aria-label="Previous"
-          />
-          <button
-            type="button"
-            className="nav-next"
-            onClick={(e) => {
-              e.stopPropagation();
-              navigateNext();
-            }}
-            aria-label="Next"
-          />
+          {!loading && (
+            <>
+              <button
+                type="button"
+                className="closer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeLightbox();
+                }}
+                aria-label="Close"
+              />
+              <button
+                type="button"
+                className="nav-previous"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigatePrev();
+                }}
+                aria-label="Previous"
+              />
+              <button
+                type="button"
+                className="nav-next"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateNext();
+                }}
+                aria-label="Next"
+              />
+            </>
+          )}
         </div>
       </div>
     );
