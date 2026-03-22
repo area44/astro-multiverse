@@ -166,7 +166,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                 backgroundImage: `url(${img.thumbnail})`,
               }}
             >
-              <img src={img.thumbnail} alt="" className="hidden" />
+              <img src={img.thumbnail} alt="" className="thumb-img" />
             </a>
           </article>
         ))}

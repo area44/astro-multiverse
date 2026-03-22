@@ -303,3 +303,22 @@
     @apply h-20 w-12 bg-[length:2.5em];
   }
 }
+
+.thumb-img {
+  @apply hidden;
+}
+
+@media screen and (max-width: 480px) {
+  #main .thumb {
+    @apply h-auto min-h-0;
+  }
+
+  #main .thumb .image {
+    @apply relative top-auto left-auto h-auto;
+    background-image: none !important;
+  }
+
+  .thumb-img {
+    @apply block h-auto w-full;
+  }
+}
