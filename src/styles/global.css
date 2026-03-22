@@ -25,7 +25,7 @@
   }
 
   body {
-    @apply m-0 p-0 bg-bg text-white font-sans text-[15pt] leading-relaxed font-light;
+    @apply m-0 bg-bg p-0 font-sans text-[15pt] leading-relaxed font-light text-white;
     @apply h-full overflow-hidden;
   }
 
@@ -39,11 +39,11 @@
   input,
   select,
   textarea {
-    @apply text-white font-sans text-[15pt] font-light leading-relaxed;
+    @apply font-sans text-[15pt] leading-relaxed font-light text-white;
   }
 
   a {
-    @apply text-white no-underline border-b border-white/50 transition-colors duration-200 ease-in-out;
+    @apply border-b border-white/50 text-white no-underline transition-colors duration-200 ease-in-out;
     &:hover {
       @apply border-b-transparent;
     }
@@ -51,7 +51,7 @@
 
   strong,
   b {
-    @apply text-white font-normal;
+    @apply font-normal text-white;
   }
 
   em,
@@ -69,9 +69,9 @@
   h4,
   h5,
   h6 {
-    @apply text-white font-normal leading-tight tracking-[0.1em] uppercase mb-6;
+    @apply mb-6 leading-tight font-normal tracking-[0.1em] text-white uppercase;
     a {
-      @apply text-inherit border-0;
+      @apply border-0 text-inherit;
     }
   }
 
@@ -95,29 +95,29 @@
   }
 
   sub {
-    @apply text-[0.8em] relative top-[0.5em];
+    @apply relative top-[0.5em] text-[0.8em];
   }
   sup {
-    @apply text-[0.8em] relative top-[-0.5em];
+    @apply relative top-[-0.5em] text-[0.8em];
   }
 
   blockquote {
-    @apply border-l-4 border-white/25 italic ml-0 pl-6 mb-8;
+    @apply mb-8 ml-0 border-l-4 border-white/25 pl-6 italic;
   }
 
   code {
-    @apply bg-white/5 border border-white/25 font-mono text-[0.9em] mx-1 px-2 py-1;
+    @apply mx-1 border border-white/25 bg-white/5 px-2 py-1 font-mono text-[0.9em];
   }
 
   pre {
-    @apply font-mono text-[0.9em] mb-8;
+    @apply mb-8 font-mono text-[0.9em];
     code {
-      @apply block p-4 leading-relaxed overflow-x-auto;
+      @apply block overflow-x-auto p-4 leading-relaxed;
     }
   }
 
   hr {
-    @apply border-0 border-b border-white/25 mb-8;
+    @apply mb-8 border-0 border-b border-white/25;
   }
 }
 
@@ -137,46 +137,46 @@
 /* Legacy support for components not yet fully migrated to utility classes in JSX */
 @layer components {
   #wrapper {
-    @apply transition-[filter] duration-500 ease-in-out relative h-full w-full;
+    @apply relative h-full w-full transition-[filter] duration-500 ease-in-out;
 
     &::after {
-      @apply pointer-events-none transition-[opacity,visibility] duration-500 bg-[#242629]/50 content-[''] block h-full w-full absolute top-0 left-0 opacity-0 invisible z-[1];
+      @apply pointer-events-none invisible absolute top-0 left-0 z-[1] block h-full w-full bg-[#242629]/50 opacity-0 transition-[opacity,visibility] duration-500 content-[''];
     }
 
     &::before {
-      @apply spinner pointer-events-none transition-[top,opacity,visibility] duration-[0.75s,0.35s,0.35s] ease-in-out bg-[url('/images/spinner.svg')] bg-center bg-no-repeat bg-contain content-[''] block text-[2em] h-[2em] w-[2em] fixed top-3/4 left-1/2 -ml-[1em] -mt-[1em] opacity-0 invisible z-[2];
+      @apply pointer-events-none invisible fixed top-3/4 left-1/2 z-[2] -mt-[1em] -ml-[1em] block h-[2em] w-[2em] spinner bg-[url('/images/spinner.svg')] bg-contain bg-center bg-no-repeat text-[2em] opacity-0 transition-[top,opacity,visibility] duration-[0.75s,0.35s,0.35s] ease-in-out content-[''];
     }
   }
 
   body.modal-active #wrapper {
     @apply blur-[8px];
     &::after {
-      @apply pointer-events-auto opacity-100 visible z-[10003];
+      @apply pointer-events-auto visible z-[10003] opacity-100;
     }
   }
 
   body.is-preload #wrapper::before {
-    @apply transition-opacity duration-1000 ease-out delay-500 opacity-25 top-1/2 visible;
+    @apply visible top-1/2 opacity-25 transition-opacity delay-500 duration-1000 ease-out;
   }
 
   #main {
-    @apply transition-[filter] duration-500 ease-in-out flex flex-wrap h-full w-full overflow-y-auto overflow-x-hidden;
+    @apply flex h-full w-full flex-wrap overflow-x-hidden overflow-y-auto transition-[filter] duration-500 ease-in-out;
 
     &::after {
-      @apply pointer-events-none transition-[opacity,visibility] duration-500 bg-[#242629]/25 content-[''] block h-full w-full absolute top-0 left-0 opacity-0 invisible z-[1];
+      @apply pointer-events-none invisible absolute top-0 left-0 z-[1] block h-full w-full bg-[#242629]/25 opacity-0 transition-[opacity,visibility] duration-500 content-[''];
     }
   }
 
   #main .thumb {
-    @apply transition-opacity duration-[1.25s] ease-in-out pointer-events-auto opacity-100 overflow-hidden relative;
+    @apply pointer-events-auto relative overflow-hidden opacity-100 transition-opacity duration-[1.25s] ease-in-out;
     @apply h-[calc(40vh-2em)] min-h-[20em] w-full sm:w-1/2 lg:w-1/3 xl:w-1/4;
 
     &::after {
-      @apply bg-gradient-to-t from-[#0a1119]/35 via-[#0a1119]/0 to-transparent pointer-events-none bg-cover content-[''] block h-full w-full absolute top-0 left-0;
+      @apply pointer-events-none absolute top-0 left-0 block h-full w-full bg-gradient-to-t from-[#0a1119]/35 via-[#0a1119]/0 to-transparent bg-cover content-[''];
     }
 
     & > .image {
-      @apply bg-center bg-no-repeat bg-cover border-0 h-full w-full absolute top-0 left-0 transition-transform duration-500 ease-in-out;
+      @apply absolute top-0 left-0 h-full w-full border-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out;
     }
 
     &:hover > .image {
@@ -184,7 +184,7 @@
     }
 
     & > h2 {
-      @apply pointer-events-none absolute bottom-[1.875em] left-[2.1875em] m-0 text-[0.85em] z-[1];
+      @apply pointer-events-none absolute bottom-[1.875em] left-[2.1875em] z-[1] m-0 text-[0.85em];
     }
   }
 
@@ -242,7 +242,7 @@
 
 /* Lightbox specific styles that are easier to keep here for now */
 .poptrox-overlay {
-  @apply fixed inset-0 z-[20000] cursor-pointer flex items-center justify-center bg-black/85;
+  @apply fixed inset-0 z-[20000] flex cursor-pointer items-center justify-center bg-black/85;
 }
 
 .poptrox-popup {
@@ -253,31 +253,31 @@
       @apply opacity-50;
     }
   }
-  @apply relative inline-block cursor-default pointer-events-auto z-[1] bg-transparent shadow-none border-0 p-0 m-0;
+  @apply pointer-events-auto relative z-[1] m-0 inline-block cursor-default border-0 bg-transparent p-0 shadow-none;
 
   &.loading::before {
     @apply opacity-0;
   }
 
   .pic {
-    @apply relative flex items-center justify-center max-w-full max-h-full z-[1] p-0;
+    @apply relative z-[1] flex max-h-full max-w-full items-center justify-center p-0;
   }
 
   .lightbox-img {
-    @apply max-w-[85vw] max-h-[85vh] object-contain transition-opacity duration-300 ease-in-out block relative z-[2] pointer-events-none shadow-none border-0;
+    @apply pointer-events-none relative z-[2] block max-h-[85vh] max-w-[85vw] border-0 object-contain shadow-none transition-opacity duration-300 ease-in-out;
   }
 
   .loader {
-    @apply spinner absolute top-1/2 left-1/2 w-8 h-8 -mt-4 -ml-4 opacity-25 bg-[url('/images/spinner.svg')] bg-center bg-no-repeat bg-contain;
+    @apply absolute top-1/2 left-1/2 -mt-4 -ml-4 h-8 w-8 spinner bg-[url('/images/spinner.svg')] bg-contain bg-center bg-no-repeat opacity-25;
   }
 
   .closer {
-    @apply absolute top-0 right-0 w-20 h-20 cursor-pointer bg-transparent border-0 z-[100] bg-[url('/images/close.svg')] bg-center bg-no-repeat bg-[length:3em] opacity-0 hover:!opacity-100 transition-opacity duration-500;
+    @apply absolute top-0 right-0 z-[100] h-20 w-20 cursor-pointer border-0 bg-transparent bg-[url('/images/close.svg')] bg-[length:3em] bg-center bg-no-repeat opacity-0 transition-opacity duration-500 hover:!opacity-100;
   }
 
   .nav-previous,
   .nav-next {
-    @apply absolute top-1/2 w-24 h-32 -mt-16 cursor-pointer bg-transparent border-0 z-[100] bg-[url('/images/arrow.svg')] bg-center bg-no-repeat bg-[length:5em] opacity-0 hover:!opacity-100 transition-opacity duration-500;
+    @apply absolute top-1/2 z-[100] -mt-16 h-32 w-24 cursor-pointer border-0 bg-transparent bg-[url('/images/arrow.svg')] bg-[length:5em] bg-center bg-no-repeat opacity-0 transition-opacity duration-500 hover:!opacity-100;
   }
 
   .nav-previous {
@@ -291,15 +291,15 @@
 
 @media screen and (max-width: 736px) {
   .poptrox-popup .lightbox-img {
-    @apply max-w-full max-h-[calc(100vh-100px)];
+    @apply max-h-[calc(100vh-100px)] max-w-full;
   }
 
   .poptrox-popup .closer {
-    @apply w-12 h-12 bg-[length:2em] top-2.5 right-2.5;
+    @apply top-2.5 right-2.5 h-12 w-12 bg-[length:2em];
   }
 
   .poptrox-popup .nav-previous,
   .poptrox-popup .nav-next {
-    @apply w-12 h-20 bg-[length:2.5em];
+    @apply h-20 w-12 bg-[length:2.5em];
   }
 }

@@ -26,6 +26,12 @@ importers:
       fontaine:
         specifier: ^0.8.0
         version: 0.8.0
+      oxfmt:
+        specifier: ^0.41.0
+        version: 0.41.0
+      oxlint:
+        specifier: ^1.56.0
+        version: 1.56.0
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -38,13 +44,6 @@ importers:
       tailwindcss:
         specifier: ^4.2.2
         version: 4.2.2
-    devDependencies:
-      oxfmt:
-        specifier: ^0.41.0
-        version: 0.41.0
-      oxlint:
-        specifier: ^1.56.0
-        version: 1.56.0
 
 packages:
 
