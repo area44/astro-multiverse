@@ -3,7 +3,6 @@ import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import BaseHead from "@/components/BaseHead.astro";
 import Gallery from "@/components/Gallery.tsx";
-import Footer from "@/components/Footer.astro";
 
 const title = "Multiverse by AREA44";
 const description =
@@ -49,7 +48,6 @@ const imageData = await Promise.all(
   <body class="is-preload">
     <div id="wrapper">
       <Gallery images={imageData} client:load />
-      <Footer />
     </div>
   </body>
 </html>
