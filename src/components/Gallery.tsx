@@ -80,18 +80,13 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     };
 
     return (
-      // biome-ignore lint/a11y/useSemanticElements: Overlay needs to be a div to avoid nested buttons
-      <div
-        className="poptrox-overlay"
-        onClick={closeLightbox}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            closeLightbox();
-          }
-        }}
-        role="button"
-        tabIndex={0}
-      >
+      <div className="poptrox-overlay">
+        <button
+          type="button"
+          className="absolute inset-0 h-full w-full cursor-pointer border-0 bg-transparent"
+          onClick={closeLightbox}
+          aria-label="Close"
+        />
         <div
           className={`poptrox-popup ${loading ? "loading" : ""}`}
           role="dialog"
