@@ -1,6 +1,6 @@
 {
   "name": "@area44/astro-multiverse",
-  "version": "25.03.15",
+  "version": "26.03.22",
   "private": true,
   "license": "CCA-3.0",
   "author": {
@@ -13,8 +13,8 @@
     "preview": "astro preview",
     "start": "astro dev",
     "format": "oxfmt",
-    "lint": "oxlint --fix",
-    "check": "oxlint . && oxfmt --check ."
+    "lint": "oxlint",
+    "check": "oxlint && oxfmt"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.1",
@@ -23,13 +23,11 @@
     "@types/react-dom": "^19.2.3",
     "astro": "^6.0.4",
     "fontaine": "^0.8.0",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2"
-  },
-  "devDependencies": {
-    "oxfmt": "^0.41.0",
-    "oxlint": "^1.56.0"
   }
 }
