@@ -4,7 +4,7 @@ This document provides instructions and context for AI agents working on this pr
 
 ## Project Overview
 
-Astro Multiverse is a re-implementation of the classic Multiverse template from HTML5 UP using modern web technologies. It eliminates legacy dependencies like jQuery and Poptrox in favor of a clean, React-based implementation.
+Astro Multiverse is a modern re-implementation by AREA44, inspired by the classic Multiverse template from HTML5 UP using modern web technologies. It eliminates legacy dependencies like jQuery and Poptrox in favor of a clean, React-based implementation.
 
 ## Tech Stack
 
