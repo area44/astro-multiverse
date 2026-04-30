@@ -74,9 +74,27 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
   const Lightbox = () => {
     const currentImage = images[currentIndex];
     const imageRef = useRef<HTMLImageElement>(null);
+    const touchStartX = useRef<number | null>(null);
 
     const handleImageLoad = () => {
       setLoading(false);
+    };
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+      if (touchStartX.current === null) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX.current - touchEndX;
+
+      if (diff > 50) {
+        navigateNext();
+      } else if (diff < -50) {
+        navigatePrev();
+      }
+      touchStartX.current = null;
     };
 
     return (
@@ -98,6 +116,8 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             }
           }}
           tabIndex={-1}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <div className="pic">
             <img
