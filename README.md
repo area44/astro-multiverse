@@ -2,13 +2,13 @@
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 
-Say hello to **Multiverse**, a slick, one-page gallery design with a fully functional lightbox. Re-imagined with Astro 6, React 19, and Tailwind CSS v4.
+Say hello to **Multiverse**, a slick, one-page gallery design with a fully functional lightbox. Re-imagined with Astro 6, React 19, and Tailwind CSS 4.
 
 ## Tech Stack
 
 - **[Astro 6](https://astro.build)** - Modern web framework for content-driven websites.
 - **[React 19](https://react.dev)** - Powering the gallery and lightbox with modern React features and Portals.
-- **[Tailwind CSS v4](https://tailwindcss.com)** - Next-generation utility-first CSS framework.
+- **[Tailwind CSS 4](https://tailwindcss.com)** - Next-generation utility-first CSS framework.
 - **[Oxlint](https://oxc.rs/docs/guide/usage/linter)** - High-performance JavaScript/TypeScript linter.
 - **[Oxfmt](https://oxc.rs/docs/guide/usage/formatter)** - Ultra-fast code formatter.
 
