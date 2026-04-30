@@ -10,7 +10,7 @@ Astro Multiverse is a modern re-implementation by AREA44, inspired by the classi
 
 - **Astro 6**: Project structure, SSG, and routing.
 - **React 19**: Gallery components and Lightbox implementation.
-- **Tailwind CSS v4**: Utility-first styling integrated via Vite plugin.
+- **Tailwind CSS 4**: Utility-first styling integrated via Vite plugin.
 - **Oxlint & Oxfmt**: Fast linting and formatting.
 
 ## Key Implementation Details
