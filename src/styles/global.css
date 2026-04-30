@@ -300,7 +300,7 @@
 
   .poptrox-popup .nav-previous,
   .poptrox-popup .nav-next {
-    @apply h-20 w-12 bg-[length:2.5em];
+    @apply hidden;
   }
 }
 
