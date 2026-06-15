@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useEffectEvent } from "react";
+import React, { useEffect, useRef, useState, useCallback, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 
 interface ImageData {
@@ -121,11 +121,15 @@ const Lightbox: React.FC<LightboxProps> = ({
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+
   useEffect(() => {
-    setIsMounted(true);
     const timer = setTimeout(() => {
       document.body.classList.remove("is-preload");
     }, 100);
@@ -144,32 +148,34 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     document.body.classList.remove("modal-active");
   };
 
-  const onNavigateNext = useEffectEvent((e?: React.MouseEvent | KeyboardEvent) => {
-    if (e && "stopPropagation" in e) e.stopPropagation();
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-    setLoading(true);
-  });
+  const onNavigateNext = useCallback(
+    (e?: React.MouseEvent | KeyboardEvent) => {
+      if (e && "stopPropagation" in e) e.stopPropagation();
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setLoading(true);
+    },
+    [images.length],
+  );
 
-  const onNavigatePrev = useEffectEvent((e?: React.MouseEvent | KeyboardEvent) => {
-    if (e && "stopPropagation" in e) e.stopPropagation();
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    setLoading(true);
-  });
-
-  const onClose = useEffectEvent(() => {
-    closeLightbox();
-  });
+  const onNavigatePrev = useCallback(
+    (e?: React.MouseEvent | KeyboardEvent) => {
+      if (e && "stopPropagation" in e) e.stopPropagation();
+      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      setLoading(true);
+    },
+    [images.length],
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowRight") onNavigateNext(e);
       if (e.key === "ArrowLeft") onNavigatePrev(e);
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, onNavigateNext, onNavigatePrev]);
 
   return (
     <>
