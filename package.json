@@ -17,14 +17,14 @@
     "check": "oxlint && oxfmt"
   },
   "dependencies": {
-    "@astrojs/react": "^6.0.4",
+    "@astrojs/react": "^6.0.5",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
-    "astro": "^7.2.9",
+    "@types/react-dom": "^19.2.7",
+    "astro": "^7.3.1",
     "fontaine": "^0.8.1",
-    "oxfmt": "^0.65.0",
-    "oxlint": "^1.80.0",
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwindcss": "^4.3.3"
