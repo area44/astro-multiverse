@@ -22,7 +22,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.3.3",
-    "fontaine": "^0.8.2",
+    "fontaine": "^1.0.0",
     "oxfmt": "^0.68.0",
     "oxlint": "^1.83.0",
     "react": "^19.3.0",
