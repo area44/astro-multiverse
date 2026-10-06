@@ -31,5 +31,6 @@
   },
   "devDependencies": {
     "sharp": "0.35.5"
-  }
+  },
+  "packageManager": "pnpm@12.8.1"
 }
