@@ -17,14 +17,14 @@
     "check": "oxlint && oxfmt"
   },
   "dependencies": {
-    "@astrojs/react": "^7.0.0",
+    "@astrojs/react": "^7.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "astro": "^7.3.5",
+    "astro": "^7.3.8",
     "fontaine": "^1.0.0",
-    "oxfmt": "^0.71.0",
-    "oxlint": "^1.86.0",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "tailwindcss": "^4.3.3"
@@ -32,5 +32,5 @@
   "devDependencies": {
     "sharp": "0.35.5"
   },
-  "packageManager": "pnpm@12.8.1"
+  "packageManager": "pnpm@12.10.1"
 }
